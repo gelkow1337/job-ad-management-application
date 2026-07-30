@@ -59,7 +59,7 @@ class UserController extends Controller
     public function show(User $user)
     {
         return inertia('Users/Show', [
-            'user' => $user,
+            'user' => $user->load('company'),
         ]);
     }
 

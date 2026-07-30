@@ -4,12 +4,12 @@ import type { User } from '@/types'
 import Nav from '@/components/Nav.vue';
 
 const props = defineProps<{
-  user: User,
+    user: User,
 }>();
 </script>
 
 <template>
-    <Head title='Job Details' />
+    <Head title='User Details' />
 
     <Nav />
 
@@ -29,7 +29,7 @@ const props = defineProps<{
 
             <div class='mb-4 mt-1'>
                 <span class='inline-block w-30 font-semibold'>Company:</span>
-                {{ user.company_id }}
+                {{ user.company?.name || '-' }}
             </div>
 
             <div class='flex gap-2'>

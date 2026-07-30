@@ -30,5 +30,3 @@ class StoreCompanyRequest extends FormRequest
         ];
     }
 }
-
-?>

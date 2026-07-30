@@ -2,16 +2,17 @@
 
 namespace App\Models;
 
+use Database\Factories\JobListingFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 #[Fillable(['company_id', 'title', 'description', 'location', 'salary'])]
 class JobListing extends Model
 {
-    /** @use HasFactory<\Database\Factories\JobListingFactory> */
+    /** @use HasFactory<JobListingFactory> */
     use HasFactory;
 
     public function categories(): BelongsToMany
@@ -24,5 +25,3 @@ class JobListing extends Model
         return $this->belongsTo(Company::class);
     }
 }
-
-?>

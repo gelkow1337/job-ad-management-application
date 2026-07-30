@@ -33,5 +33,3 @@ class UpdateJobListingRequest extends FormRequest
         ];
     }
 }
-
-?>

@@ -27,5 +27,3 @@ class StoreCategoryRequest extends FormRequest
         ];
     }
 }
-
-?>

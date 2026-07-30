@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
-use Illuminate\Routing\Controller;
 use App\Http\Requests\StoreJobListingRequest;
 use App\Http\Requests\UpdateJobListingRequest;
-use App\Models\JobListing;
 use App\Models\Category;
 use App\Models\Company;
+use App\Models\JobListing;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Routing\Controller;
 
 class JobListingController extends Controller
 {
@@ -56,7 +56,7 @@ class JobListingController extends Controller
     public function show(JobListing $jobListing)
     {
         return inertia('JobListings/Show', [
-            'jobListing' => $jobListing->load('company', 'categories')
+            'jobListing' => $jobListing->load('company', 'categories'),
         ]);
     }
 
@@ -93,5 +93,3 @@ class JobListingController extends Controller
         return redirect()->route('job-listings.index');
     }
 }
-
-?>

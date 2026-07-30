@@ -33,5 +33,3 @@ class StoreJobListingRequest extends FormRequest
         ];
     }
 }
-
-?>

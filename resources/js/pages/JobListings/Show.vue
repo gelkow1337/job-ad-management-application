@@ -1,72 +1,73 @@
-<script setup lang='ts'>
-import { Head, Link } from '@inertiajs/vue3'
-import type { JobListing } from '@/types'
+<script setup lang="ts">
+import { Head, Link } from '@inertiajs/vue3';
 import Nav from '@/components/Nav.vue';
+import type { JobListing } from '@/types';
 
-const props = defineProps<{
-  jobListing: JobListing,
+defineProps<{
+    jobListing: JobListing;
 }>();
 </script>
 
 <template>
-    <Head title='Job Details' />
+    <Head title="Job Details" />
 
     <Nav />
 
     <main>
-        <h1 class='mb-6 text-2xl text-center font-semibold'>Job Details</h1>
+        <h1 class="mb-6 text-center text-2xl font-semibold">Job Details</h1>
 
-        <div class='p-8 bg-neutral-200'>
-            <div class='mb-4'>
-                <span class='inline-block w-30 font-semibold'>Job Title:</span>
+        <div class="bg-neutral-200 p-8">
+            <div class="mb-4">
+                <span class="inline-block w-30 font-semibold">Job Title:</span>
                 {{ jobListing.title }}
             </div>
 
-            <div class='mb-4 mt-1'>
-                <span class='inline-block w-30 font-semibold'>Company:</span>
+            <div class="mt-1 mb-4">
+                <span class="inline-block w-30 font-semibold">Company:</span>
                 {{ jobListing.company?.name }}
             </div>
 
-            <div class='mb-4 mt-1'>
-                <span class='inline-block w-30 font-semibold'>Description:</span>
+            <div class="mt-1 mb-4">
+                <span class="inline-block w-30 font-semibold"
+                    >Description:</span
+                >
                 {{ jobListing.description }}
             </div>
 
-            <div class='mb-4'>
-                <span class='inline-block w-30 font-semibold'>Location:</span>
+            <div class="mb-4">
+                <span class="inline-block w-30 font-semibold">Location:</span>
                 {{ jobListing.location || 'No value' }}
             </div>
 
-            <div class='mb-4'>
-                <span class='inline-block w-30 font-semibold'>Salary:</span>
+            <div class="mb-4">
+                <span class="inline-block w-30 font-semibold">Salary:</span>
                 {{ jobListing.salary ? jobListing.salary + ' $' : 'No value' }}
             </div>
 
-            <div class='mb-6 flex'>
-                <span class='inline-block w-30 font-semibold'>Categories:</span>
+            <div class="mb-6 flex">
+                <span class="inline-block w-30 font-semibold">Categories:</span>
 
-                <div v-if='!jobListing.categories?.length'>-</div>
+                <div v-if="!jobListing.categories?.length">-</div>
 
                 <ul v-else>
                     <li
-                        v-for='category in jobListing.categories'
-                        :key='category.id'
+                        v-for="category in jobListing.categories"
+                        :key="category.id"
                     >
                         {{ category.name }}
                     </li>
                 </ul>
             </div>
 
-            <div class='flex gap-2'>
-                <Link
-                    href='/jobs'
-                    class='px-3 py-1 bg-blue-700 text-white'
-                >
+            <div class="flex gap-2">
+                <Link href="/jobs" class="bg-blue-700 px-3 py-1 text-white">
                     Go Back
                 </Link>
 
-                <Link :href='`/jobs/${jobListing.id}/edit`'
-                    class='px-3 py-1 bg-orange-700 text-white'>
+                <Link
+                    :href="`/jobs/${jobListing.id}/edit`"
+                    class="bg-orange-700 px-3 py-1 text-white"
+                >
                     Edit
                 </Link>
             </div>

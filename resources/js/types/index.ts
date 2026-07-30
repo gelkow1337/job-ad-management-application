@@ -31,3 +31,8 @@ export interface Category {
     id: number;
     name: string;
 }
+
+export interface BreadCrumb {
+    label: string;
+    href?: string;
+}

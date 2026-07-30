@@ -1,14 +1,14 @@
 <script setup lang="ts">
 import { Head } from '@inertiajs/vue3';
-import Nav from '@/components/Nav.vue';
+import AppLayout from '@/layouts/AppLayout.vue';
 </script>
 
 <template>
     <Head title="Home" />
 
-    <Nav />
-
-    <main>
-        <h1 class="text-center text-2xl font-semibold">Home</h1>
-    </main>
+    <AppLayout>
+        <main>
+            <h1 class="text-center text-2xl font-semibold">Home</h1>
+        </main>
+    </AppLayout>
 </template>

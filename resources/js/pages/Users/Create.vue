@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { Head, Link, useForm } from '@inertiajs/vue3';
-import Nav from '@/components/Nav.vue';
+import AppLayout from '@/layouts/AppLayout.vue';
 import type { Company } from '@/types';
 
 defineProps<{
@@ -21,61 +21,61 @@ const submit = () => {
 <template>
     <Head title="Create User" />
 
-    <Nav />
+    <AppLayout>
+        <main>
+            <h1 class="mb-6 text-center text-2xl font-semibold">Create User</h1>
 
-    <main>
-        <h1 class="mb-6 text-center text-2xl font-semibold">Create User</h1>
+            <div class="mt-6 bg-neutral-200 p-8">
+                <form @submit.prevent="submit">
+                    <label class="mb-1 block">Username *</label>
+                    <input
+                        required
+                        v-model="form.name"
+                        type="text"
+                        class="w-full border border-neutral-500 p-2"
+                    />
 
-        <div class="mt-6 bg-neutral-200 p-8">
-            <form @submit.prevent="submit">
-                <label class="mb-1 block">Username *</label>
-                <input
-                    required
-                    v-model="form.name"
-                    type="text"
-                    class="w-full border border-neutral-500 p-2"
-                />
+                    <label class="mt-4 mb-1 block">Email *</label>
+                    <input
+                        required
+                        v-model="form.email"
+                        type="text"
+                        class="w-full border border-neutral-500 p-2"
+                    />
 
-                <label class="mt-4 mb-1 block">Email *</label>
-                <input
-                    required
-                    v-model="form.email"
-                    type="text"
-                    class="w-full border border-neutral-500 p-2"
-                />
-
-                <label class="mt-4 mb-1 block">Company</label>
-                <select
-                    v-model="form.company_id"
-                    class="w-full border border-neutral-500 p-2"
-                >
-                    <option value="" disabled>Please select a company</option>
-
-                    <option
-                        v-for="company in companies"
-                        :key="company.id"
-                        :value="company.id"
+                    <label class="mt-4 mb-1 block">Company</label>
+                    <select
+                        v-model="form.company_id"
+                        class="w-full border border-neutral-500 p-2"
                     >
-                        {{ company.name }}
-                    </option>
-                </select>
+                        <option value="" disabled>Please select a company</option>
 
-                <div class="flex gap-2 pt-4">
-                    <button
-                        type="submit"
-                        class="bg-green-700 px-3 py-1 text-white"
-                    >
-                        Create
-                    </button>
+                        <option
+                            v-for="company in companies"
+                            :key="company.id"
+                            :value="company.id"
+                        >
+                            {{ company.name }}
+                        </option>
+                    </select>
 
-                    <Link
-                        href="/users"
-                        class="bg-orange-700 px-3 py-1 text-white"
-                    >
-                        Cancel
-                    </Link>
-                </div>
-            </form>
-        </div>
-    </main>
+                    <div class="flex gap-2 pt-4">
+                        <button
+                            type="submit"
+                            class="bg-green-700 px-3 py-1 text-white"
+                        >
+                            Create
+                        </button>
+
+                        <Link
+                            href="/users"
+                            class="bg-orange-700 px-3 py-1 text-white"
+                        >
+                            Cancel
+                        </Link>
+                    </div>
+                </form>
+            </div>
+        </main>
+    </AppLayout>
 </template>

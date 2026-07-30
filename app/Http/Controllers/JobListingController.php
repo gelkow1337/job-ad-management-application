@@ -28,6 +28,9 @@ class JobListingController extends Controller
     {
         return inertia('JobListings/Index', [
             'jobListings' => JobListing::with('company', 'categories')->get(),
+            'breadCrumbs' => [
+                ['label' => 'Jobs'],
+            ],
         ]);
     }
 
@@ -39,6 +42,10 @@ class JobListingController extends Controller
         return inertia('JobListings/Create', [
             'companies' => Company::all(),
             'categories' => Category::all(),
+            'breadCrumbs' => [
+                ['label' => 'Jobs', 'href' => route('job-listings.index')],
+                ['label' => 'Create'],
+            ],
         ]);
     }
 
@@ -59,6 +66,10 @@ class JobListingController extends Controller
     {
         return inertia('JobListings/Show', [
             'jobListing' => $jobListing->load('company', 'categories'),
+            'breadCrumbs' => [
+                ['label' => 'Jobs', 'href' => route('job-listings.index')],
+                ['label' => $jobListing->id],
+            ],
         ]);
     }
 
@@ -71,6 +82,11 @@ class JobListingController extends Controller
             'jobListing' => $jobListing->load('categories'),
             'companies' => Company::all(),
             'categories' => Category::all(),
+            'breadCrumbs' => [
+                ['label' => 'Jobs', 'href' => route('job-listings.index')],
+                ['label' => $jobListing->id, 'href' => route('job-listings.show', $jobListing)],
+                ['label' => 'Edit'],
+            ],
         ]);
     }
 

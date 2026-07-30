@@ -27,6 +27,9 @@ class UserController extends Controller
     {
         return inertia('Users/Index', [
             'users' => User::with('company')->get(),
+            'breadCrumbs' => [
+                ['label' => 'Users'],
+            ],
         ]);
     }
 
@@ -37,6 +40,10 @@ class UserController extends Controller
     {
         return inertia('Users/Create', [
             'companies' => Company::all(),
+            'breadCrumbs' => [
+                ['label' => 'Users', 'href' => route('users.index')],
+                ['label' => 'Create'],
+            ],
         ]);
     }
 
@@ -61,6 +68,10 @@ class UserController extends Controller
     {
         return inertia('Users/Show', [
             'user' => $user->load('company'),
+            'breadCrumbs' => [
+                ['label' => 'Users', 'href' => route('users.index')],
+                ['label' => $user->id],
+            ],
         ]);
     }
 
@@ -72,6 +83,11 @@ class UserController extends Controller
         return inertia('Users/Edit', [
             'user' => $user,
             'companies' => Company::all(),
+            'breadCrumbs' => [
+                ['label' => 'Users', 'href' => route('users.index')],
+                ['label' => $user->id, 'href' => route('users.show', $user)],
+                ['label' => 'Edit'],
+            ],
         ]);
     }
 

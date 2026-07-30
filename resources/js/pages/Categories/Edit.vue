@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { Head, useForm, router } from '@inertiajs/vue3';
-import Nav from '@/components/Nav.vue';
+import AppLayout from '@/layouts/AppLayout.vue';
 import type { Category } from '@/types';
 
 const props = defineProps<{
@@ -29,46 +29,46 @@ const goBack = () => {
 <template>
     <Head title="Edit Category" />
 
-    <Nav />
+    <AppLayout>
+        <main>
+            <h1 class="mb-6 text-center text-2xl font-semibold">Edit Category</h1>
 
-    <main>
-        <h1 class="mb-6 text-center text-2xl font-semibold">Edit Category</h1>
+            <div class="bg-neutral-200 p-8">
+                <form @submit.prevent="submit">
+                    <label class="mb-1 block">Name *</label>
+                    <input
+                        required
+                        v-model="form.name"
+                        type="text"
+                        class="mb-4 w-full border p-2"
+                    />
 
-        <div class="bg-neutral-200 p-8">
-            <form @submit.prevent="submit">
-                <label class="mb-1 block">Name *</label>
-                <input
-                    required
-                    v-model="form.name"
-                    type="text"
-                    class="mb-4 w-full border p-2"
-                />
+                    <div class="flex gap-2">
+                        <button
+                            type="submit"
+                            class="bg-blue-700 px-3 py-1 text-white"
+                        >
+                            Save
+                        </button>
 
-                <div class="flex gap-2">
-                    <button
-                        type="submit"
-                        class="bg-blue-700 px-3 py-1 text-white"
-                    >
-                        Save
-                    </button>
+                        <button
+                            @click="deleteCategory"
+                            type="button"
+                            class="bg-red-700 px-3 py-1 text-white"
+                        >
+                            Delete
+                        </button>
 
-                    <button
-                        @click="deleteCategory"
-                        type="button"
-                        class="bg-red-700 px-3 py-1 text-white"
-                    >
-                        Delete
-                    </button>
-
-                    <button
-                        class="bg-orange-700 px-3 py-1 text-white"
-                        type="button"
-                        @click="goBack"
-                    >
-                        Cancel
-                    </button>
-                </div>
-            </form>
-        </div>
-    </main>
+                        <button
+                            class="bg-orange-700 px-3 py-1 text-white"
+                            type="button"
+                            @click="goBack"
+                        >
+                            Cancel
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </main>
+    </AppLayout>
 </template>

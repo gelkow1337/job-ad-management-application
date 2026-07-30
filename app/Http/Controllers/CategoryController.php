@@ -26,6 +26,9 @@ class CategoryController extends Controller
     {
         return inertia('Categories/Index', [
             'categories' => Category::get(),
+            'breadCrumbs' => [
+                ['label' => 'Categories']
+            ],
         ]);
     }
 
@@ -34,7 +37,12 @@ class CategoryController extends Controller
      */
     public function create(): Response
     {
-        return inertia('Categories/Create');
+        return inertia('Categories/Create', [
+            'breadCrumbs' => [
+                ['label' => 'Categories', 'href' => route('categories.index')],
+                ['label' => 'Create'],
+            ],
+        ]);
     }
 
     /**
@@ -54,6 +62,10 @@ class CategoryController extends Controller
     {
         return inertia('Categories/Show', [
             'category' => $category,
+            'breadCrumbs' => [
+                ['label' => 'Categories', 'href' => route('categories.index')],
+                ['label' => $category->id],
+            ],
         ]);
     }
 
@@ -64,6 +76,11 @@ class CategoryController extends Controller
     {
         return inertia('Categories/Edit', [
             'category' => $category,
+            'breadCrumbs' => [
+                ['label' => 'Categories', 'href' => route('categories.index')],
+                ['label' => $category->id, 'href' => route('categories.show', $category)],
+                ['label' => 'Edit'],
+            ],
         ]);
     }
 

@@ -26,6 +26,9 @@ class CompanyController extends Controller
     {
         return inertia('Companies/Index', [
             'companies' => Company::get(),
+            'breadCrumbs' => [
+                ['label' => 'Companies'],
+            ],
         ]);
     }
 
@@ -34,7 +37,12 @@ class CompanyController extends Controller
      */
     public function create(): Response
     {
-        return inertia('Companies/Create');
+        return inertia('Companies/Create', [
+            'breadCrumbs' => [
+                ['label' => 'Companies', 'href' => route('companies.index')],
+                ['label' => 'Create'],
+            ],
+        ]);
     }
 
     /**
@@ -54,6 +62,10 @@ class CompanyController extends Controller
     {
         return inertia('Companies/Show', [
             'company' => $company,
+            'breadCrumbs' => [
+                ['label' => 'Companies', 'href' => route('companies.index')],
+                ['label' => $company->id],
+            ],
         ]);
     }
 
@@ -64,6 +76,11 @@ class CompanyController extends Controller
     {
         return inertia('Companies/Edit', [
             'company' => $company,
+            'breadCrumbs' => [
+                ['label' => 'Companies', 'href' => route('companies.index')],
+                ['label' => $company->id, 'href' => route('companies.show', $company)],
+                ['label' => 'Edit'],
+            ],
         ]);
     }
 

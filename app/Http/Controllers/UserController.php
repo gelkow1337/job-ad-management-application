@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use Inertia\Response;
-use Illuminate\Http\RedirectResponse;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Models\Company;
 use App\Models\User;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Routing\Controller;
+use Inertia\Response;
 
 class UserController extends Controller
 {

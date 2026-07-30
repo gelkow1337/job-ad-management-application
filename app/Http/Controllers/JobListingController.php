@@ -2,15 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use Inertia\Response;
-use Illuminate\Http\RedirectResponse;
 use App\Http\Requests\StoreJobListingRequest;
 use App\Http\Requests\UpdateJobListingRequest;
 use App\Models\Category;
 use App\Models\Company;
 use App\Models\JobListing;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Routing\Controller;
+use Inertia\Response;
 
 class JobListingController extends Controller
 {

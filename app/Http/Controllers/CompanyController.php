@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use Inertia\Response;
-use Illuminate\Http\RedirectResponse;
 use App\Http\Requests\StoreCompanyRequest;
 use App\Http\Requests\UpdateCompanyRequest;
 use App\Models\Company;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Routing\Controller;
+use Inertia\Response;
 
 class CompanyController extends Controller
 {

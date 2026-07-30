@@ -14,6 +14,9 @@ class Category extends Model
     /** @use HasFactory<CategoryFactory> */
     use HasFactory;
 
+    /**
+     * @return BelongsToMany<JobListing, $this>
+     */
     public function jobListings(): BelongsToMany
     {
         return $this->belongsToMany(JobListing::class);

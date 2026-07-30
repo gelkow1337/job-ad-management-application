@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Inertia\Response;
+use Illuminate\Http\RedirectResponse;
 use App\Http\Requests\StoreJobListingRequest;
 use App\Http\Requests\UpdateJobListingRequest;
 use App\Models\Category;
@@ -22,7 +24,7 @@ class JobListingController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(): Response
     {
         return inertia('JobListings/Index', [
             'jobListings' => JobListing::with('company', 'categories')->get(),
@@ -32,7 +34,7 @@ class JobListingController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(): Response
     {
         return inertia('JobListings/Create', [
             'companies' => Company::all(),
@@ -43,7 +45,7 @@ class JobListingController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreJobListingRequest $request)
+    public function store(StoreJobListingRequest $request): RedirectResponse
     {
         JobListing::create($request->validated());
 
@@ -53,7 +55,7 @@ class JobListingController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(JobListing $jobListing)
+    public function show(JobListing $jobListing): Response
     {
         return inertia('JobListings/Show', [
             'jobListing' => $jobListing->load('company', 'categories'),
@@ -63,7 +65,7 @@ class JobListingController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(JobListing $jobListing)
+    public function edit(JobListing $jobListing): Response
     {
         return inertia('JobListings/Edit', [
             'jobListing' => $jobListing->load('categories'),
@@ -75,7 +77,7 @@ class JobListingController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateJobListingRequest $request, JobListing $jobListing)
+    public function update(UpdateJobListingRequest $request, JobListing $jobListing): RedirectResponse
     {
         $jobListing->update($request->validated());
         $jobListing->categories()->sync($request->input('categories', []));
@@ -86,7 +88,7 @@ class JobListingController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(JobListing $jobListing)
+    public function destroy(JobListing $jobListing): RedirectResponse
     {
         $jobListing->delete();
 

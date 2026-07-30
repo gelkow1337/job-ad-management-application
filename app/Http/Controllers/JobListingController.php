@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreJobListingRequest;
 use App\Http\Requests\UpdateJobListingRequest;
 use App\Models\JobListing;
+use App\Models\Category;
+use App\Models\Company;
 
 class JobListingController
 {
@@ -13,7 +15,9 @@ class JobListingController
      */
     public function index()
     {
-        //
+        return inertia('JobListings/Index', [
+            'jobListings' => JobListing::with('company', 'categories')->get(),
+        ]);
     }
 
     /**
@@ -21,7 +25,10 @@ class JobListingController
      */
     public function create()
     {
-        //
+        return inertia('JobListings/Create', [
+            'companies' => Company::all(),
+            'categories' => Category::all(),
+        ]);
     }
 
     /**
@@ -29,7 +36,9 @@ class JobListingController
      */
     public function store(StoreJobListingRequest $request)
     {
-        //
+        JobListing::create($request->validated());
+
+        return redirect()->route('job-listings.index');
     }
 
     /**
@@ -37,7 +46,9 @@ class JobListingController
      */
     public function show(JobListing $jobListing)
     {
-        //
+        return inertia('JobListings/Show', [
+            'jobListing' => $jobListing->load('company', 'categories')
+        ]);
     }
 
     /**
@@ -45,7 +56,11 @@ class JobListingController
      */
     public function edit(JobListing $jobListing)
     {
-        //
+        return inertia('JobListings/Edit', [
+            'jobListing' => $jobListing->load('categories'),
+            'companies' => Company::all(),
+            'categories' => Category::all(),
+        ]);
     }
 
     /**
@@ -53,7 +68,10 @@ class JobListingController
      */
     public function update(UpdateJobListingRequest $request, JobListing $jobListing)
     {
-        //
+        $jobListing->update($request->validated());
+        $jobListing->categories()->sync($request->input('categories', []));
+
+        return redirect()->route('job-listings.index');
     }
 
     /**
@@ -61,6 +79,10 @@ class JobListingController
      */
     public function destroy(JobListing $jobListing)
     {
-        //
+        $jobListing->delete();
+
+        return redirect()->route('job-listings.index');
     }
 }
+
+?>

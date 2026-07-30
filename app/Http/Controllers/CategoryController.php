@@ -13,7 +13,9 @@ class CategoryController
      */
     public function index()
     {
-        //
+        return inertia('Categories/Index', [
+            'categories' => Category::get(),
+        ]);
     }
 
     /**
@@ -21,7 +23,7 @@ class CategoryController
      */
     public function create()
     {
-        //
+        return inertia('Categories/Create');
     }
 
     /**
@@ -29,7 +31,9 @@ class CategoryController
      */
     public function store(StoreCategoryRequest $request)
     {
-        //
+        Category::create($request->validated());
+
+        return redirect()->route('categories.index');
     }
 
     /**
@@ -37,7 +41,9 @@ class CategoryController
      */
     public function show(Category $category)
     {
-        //
+        return inertia('Categories/Show', [
+            'category' => $category,
+        ]);
     }
 
     /**
@@ -45,7 +51,9 @@ class CategoryController
      */
     public function edit(Category $category)
     {
-        //
+        return inertia('Categories/Edit', [
+            'category' => $category,
+        ]);
     }
 
     /**
@@ -53,7 +61,9 @@ class CategoryController
      */
     public function update(UpdateCategoryRequest $request, Category $category)
     {
-        //
+        $category->update($request->validated());
+
+        return redirect()->route('categories.index');
     }
 
     /**
@@ -61,6 +71,10 @@ class CategoryController
      */
     public function destroy(Category $category)
     {
-        //
+        $category->delete();
+
+        return redirect()->route('categories.index');
     }
 }
+
+?>

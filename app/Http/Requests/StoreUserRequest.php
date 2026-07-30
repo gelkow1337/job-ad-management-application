@@ -2,10 +2,11 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Validation\Rule;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreCompanyRequest extends FormRequest
+class StoreUserRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,10 +24,12 @@ class StoreCompanyRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'company_id' => 'nullable|exists:companies,id',
             'name' => 'required|string|max:255',
-            'description' => 'required|string',
-            'number_of_employees' => 'integer',
-            'website' => 'string|max:255',
+            'email' => [
+                'required', 'string', 'email', 'max:255',
+                Rule::unique('users')->ignore($this->route('user')),
+            ],
         ];
     }
 }

@@ -12,7 +12,7 @@ class StoreJobListingRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -23,7 +23,15 @@ class StoreJobListingRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'company_id' => 'required|exists:companies,id',
+            'title' => 'required|string|max:255',
+            'description' => 'required|string',
+            'location' => 'nullable|string',
+            'salary' => 'nullable|integer',
+            'categories' => 'array',
+            'categories.*' => 'exists:categories,id',
         ];
     }
 }
+
+?>

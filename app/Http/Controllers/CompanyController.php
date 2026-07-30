@@ -13,7 +13,9 @@ class CompanyController
      */
     public function index()
     {
-        //
+        return inertia('Companies/Index', [
+            'companies' => Company::get(),
+        ]);
     }
 
     /**
@@ -21,7 +23,7 @@ class CompanyController
      */
     public function create()
     {
-        //
+        return inertia('Companies/Create');
     }
 
     /**
@@ -29,7 +31,9 @@ class CompanyController
      */
     public function store(StoreCompanyRequest $request)
     {
-        //
+        Company::create($request->validated());
+
+        return redirect()->route('companies.index');
     }
 
     /**
@@ -37,7 +41,9 @@ class CompanyController
      */
     public function show(Company $company)
     {
-        //
+        return inertia('Companies/Show', [
+            'company' => $company,
+        ]);
     }
 
     /**
@@ -45,7 +51,9 @@ class CompanyController
      */
     public function edit(Company $company)
     {
-        //
+        return inertia('Companies/Edit', [
+            'company' => $company,
+        ]);
     }
 
     /**
@@ -53,7 +61,9 @@ class CompanyController
      */
     public function update(UpdateCompanyRequest $request, Company $company)
     {
-        //
+        $company->update($request->validated());
+
+        return redirect()->route('companies.index');
     }
 
     /**
@@ -61,6 +71,10 @@ class CompanyController
      */
     public function destroy(Company $company)
     {
-        //
+        $company->delete();
+
+        return redirect()->route('companies.index');
     }
 }
+
+?>
